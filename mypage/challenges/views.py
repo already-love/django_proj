@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.http import Http404, HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.urls import reverse
 from django.template.loader import render_to_string
 # Create your views here.
@@ -59,7 +59,9 @@ def monthlychallenge(requests, month):
         return render(requests, "challenges/challenge.html", {
             "text":challenge_text,
             "month_name":month
-        }) #必须有first argument
+        }) #必须有first argument.   render返回值永远是成功的。
 
     except:
-        return HttpResponseNotFound("<h1>This month is not supported</h1>")
+        # resposne_data = render_to_string("404.html")
+        # return HttpResponseNotFound(resposne_data)    #都是用string写的html。用这个还能报错
+        raise Http404()   #自动寻找templates里面的404.html
