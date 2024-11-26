@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    My Blog
+{% endblock %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "blog/index.css" %}" />
+{% endblock %}
+
+{% block content %}
+    <header id="main-navigation">
+        <h1> <a href=""> Viper's Blog </a> </h1>
+        <nav>
+            <a href=""> All Posts </a> 
+        </nav>
+    </header>
+
+    <section id="welcome">
+        <header>
+            <img src="{% static "blog/images/burger.jpg"%}" alt="Viper the Owner of the Blog"/>
+            <h2>VIPERPRICE'S BLOG</h2>
+        </header>
+        <p>Hi this is an archive of Viper Price's blog. Though the owner is away now, feel free to explore the blog posts. </p>
+    </section>
+
+    <section id="latest-posts">
+        <h2> Viper's Latest Thoughts. </h2>
+        <ul>
+            <li>
+                <article class="post">
+                    <a href="">
+                        <img src="{% static "blog/images/sea.jpg"%}" alt="Deepsea Diving"/>
+                        <div class="post__content">
+                            <h3>Sea Touring</h3>
+                            <p>
+                                The sea is calm and quiet. What about you?
+                            </p>
+                        </div>
+                    </a>
+                </article>
+            </li>
+        </ul>
+    </section>
+
+    <section id="about">
+        <h2>What Viper does</h2>
+        <p>Viper enjoys hunting and playing video games. 
+            During their university days, Viper was an active member of an e-gaming society.
+        </p>
+        <p>Viper is a highly dangerous individual and remains on the wanted list. 
+            If you encounter Viper, please report immediately to the Central Police Bureau.
+        </p>
+    </section>
+{% endblock %}
