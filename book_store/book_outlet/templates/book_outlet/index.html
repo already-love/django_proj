@@ -8,7 +8,14 @@ All books
 {%block content%}
 <ul>
     {% for book in books%}
-        <li> <a href="{{book.get_absolute_url }}">{{book.title}} </a>(Rating: {{book.rating }})</li>  <!--还可以<a href="{%url "book-detail" book.id %}"> -->
+        <li> <a href="{{book.get_absolute_url }}">{{book.title}} </a>(Rating: {{book.rating }})</li>  <!-- 从models.py 定义的函数 还可以<a href="{%url "book-detail" book.id %}"> -->
     {% endfor %}
 </ul>
+
+<hr>
+    <p> Total Number of Books: {{total_number_of_books}} </p>
+    <p> Average Rating: {{rating_data.rating__avg}} </p>
+    <p> Max Rating: {{rating_data.rating__max}} </p>
+    <p> Min Rating: {{rating_data.rating__min}} </p>
+</hr>
 {% endblock %}

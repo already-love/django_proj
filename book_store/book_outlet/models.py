@@ -9,10 +9,13 @@ class Book(models.Model):
     rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
     author = models.CharField(null=True, max_length=100)  #可以为null默认值
     is_bestselling = models.BooleanField(default=True)
-    slug = models.SlugField(default="", null=False)  # Harry Potter 1 => harry-potter-1 从标题自动转换
+    slug = models.SlugField(default="", blank=True, 
+                            null=False, db_index= True)  # 如果用这个query，可以设置为index。但是设置太多column为index会降低效率。
+    # blank = True 意味着admin界面存储的时候，这一项不是required。反正最后会被save覆盖
+    # editable = False意味着也不让admin改这个值
 
     def get_absolute_url(self):
-        return reverse("book-detail", args=[self.id])  #可以传给index.html让它找url
+        return reverse("book-detail", args=[self.slug])  #可以传给index.html让它找url
     
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title) # Harry Potter 1 => harry-potter-1 从标题自动转换
