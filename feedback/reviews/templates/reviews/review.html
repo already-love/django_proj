@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your review</title>
+</head>
+<body>
+    <form action="/" method="POST">
+        {% csrf_token %}
+        {% if has_error %}
+        <p> This input is invalid. Please input a valid username!</p>
+        {% endif %}
+        <label for="username"> Your Name </label>
+        <input id="username" name="username" type = "text">
+        <button>Send</button>
+    </form>
+</body>
+</html>
