@@ -3,24 +3,40 @@ from django.shortcuts import render
 from django.views import View
 from django.views.generic.base import TemplateView
 from django.views.generic import ListView, DetailView   #一种特定TemplateView
+from django.views.generic.edit import FormView, CreateView   #一种特定TemplateView
+
+
 from .forms import ReviewForm
 from .models import Review
 
-class ReviewView(View):
-    def get(self,request):
-        form = ReviewForm()       #user_name在forms.py定义好了，就不用在template里面hard-code了
+class ReviewView(CreateView):   #如果是CreateView，那么forms.py里面都可以删了
+    # form_class = ReviewForm
+    model = Review
+    form_class = ReviewForm
+    # fields = "__all__"
+    template_name = "reviews/review.html"   #这两行handle了get()
+    success_url = "/thank-you"   #POST
+
+    # def form_valid(self, form):
+    #     form.save()
+    #     return super().form_valid(form)
+    
+
+    # def get(self,request):
+    #     form = ReviewForm()       #user_name在forms.py定义好了，就不用在template里面hard-code了
         
-        return render(request, "reviews/review.html", {
-            "form": form
-        })
-    def post(self, request):
-        form = ReviewForm(request.POST)   #如果此处是model form，就不需要下面几行直接form.save()
-        if form.is_valid():
-            form.save()         #返回dict {'user_name': 'max'}
-            return HttpResponseRedirect("/thank-you")
-        return render(request, "reviews/review.html", {
-            "form": form
-        })
+    #     return render(request, "reviews/review.html", {
+    #         "form": form
+    #     })
+
+    # def post(self, request):
+    #     form = ReviewForm(request.POST)   #如果此处是model form，就不需要下面几行直接form.save()
+    #     if form.is_valid():
+    #         form.save()         #返回dict {'user_name': 'max'}
+    #         return HttpResponseRedirect("/thank-you")
+    #     return render(request, "reviews/review.html", {
+    #         "form": form
+    #     })
     
 # # Create your views here.
 # def review(request):
