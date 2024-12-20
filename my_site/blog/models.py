@@ -24,7 +24,7 @@ class Author(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=150)
     excerpt = models.CharField(max_length=200)
-    image_name =  models.CharField(max_length=100)
+    image = models.ImageField(upload_to="posts", null=True)
     date = models.DateField(auto_now=True)
     content = models.TextField(validators=[MinLengthValidator(10)])
         # author = models.CharField(null=True, max_length=100)  #可以为null默认值
